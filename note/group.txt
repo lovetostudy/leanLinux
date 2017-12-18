@@ -1,0 +1,41 @@
+指定gid:
+	groupadd macket -g 2000 (指定macket组的gid为2000)
+	
+	
+用户创建：
+a.s	如果创建一个用户时，未指定任何选项，系统会创建一个和用户名相同
+		的组作为用户的Primary Group.
+	
+	
+b.	用户:1.主组:有且只有一个 --> 有指定，则指定组作为该用户的主组 -g(尽量不用)
+							 --> 未指定，系统会创建一个和用户同名的主组作为主组
+		 
+		 2.附加组:可以有多个 --> 创建用户时指定 -G macket
+							 --> 用户已存在，加入到附加组 usermod gpasswd
+							 
+		注意： 1.-g -G 仅使用useradd 创建用户时使用
+			   2.-g -G 指定的组必须事先存在
+
+c.	useradd user05 -s /sbin/nologin (创建用户并指定shell)(nologin用户没有shell,但可以访问ftp)
+
+d.	userdel user05 	// 删除用户uer05,但不删除用户家目录和mail spool
+		-r    删除用户的家目录和mail spool
+	若用户已经被删除，可以用 rm -rf 手动删除其家目录和mail spool
+
+e.	root用户可以给任何用户设置密码
+	普通用户只能给自己修改密码，而且必须提供原密码
+
+f. 组成员管理
+	user mod -s /sbin/nologin user05 // 修改用户的shell
+	
+	gpasswd -a jack wheel(推荐) 	// (不推荐)usermod -aG macket user05
+	//添加	  什么用户 到  什么组
+		-a (add) -d(delete) -M(添加多个用户到什么组)
+		
+		
+		
+	// 不推荐使用的：
+		usermod -G macket user05 	 // 覆盖原有的附加组
+		usermod -G macket,hr user05
+		usermod -aG macket user05	 // 增加新的附加组（不覆盖）
+		

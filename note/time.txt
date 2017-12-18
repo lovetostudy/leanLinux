@@ -1,0 +1,7 @@
+atime	查看内容
+mtime	修改内容	(modify)
+ctime	修改文件属性，如权限 	(change)
+dtime	文件被删除的时间
+
+
+stat /etc/hostname	查看文件的所有属性
