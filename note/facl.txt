@@ -1,0 +1,44 @@
+facl: 访问控制列表
+
+ugo 设置基本权限：只能一个用户，一个组和其他人
+facl 设置基本权限： rwx
+
+
+# getfacl /home/test.txt
+	# file: home/test.txt
+	#owner: root
+	#group: root
+	user::rw-
+	group::r--
+	other::r--
+	
+# setfacl -m(modify) u(或user):alice:rw /home/test.txt
+	-rw-rw-r--+(加了一个加号) root root /home/test.txt
+	(有加号表示该文件有facl权限)(用getfacl查看)
+	
+# getfacl /home/test.txt
+	# file: home/test.txt
+	#owner: root
+	#group: root
+	user::rw-
+	user:alice:rw-
+	group::r--
+	mask::rw-	(表示现在不是主权限，而是mask权限)
+	other::r--
+	
+
+# setfacl -m group:hr:rw /home/test.txt
+# getfacl /home/test.txt
+	# file: home/test.txt
+	#owner: root
+	#group: root
+	user::rw-
+	user:alice:rw-
+	group::r--
+	group:hr:rw-
+	mask::rw-	
+	other::r--
+
+# setfacl --remove-all(或-b) /home/test.txt(移除赋予的所有权限)
+
+	

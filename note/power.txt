@@ -1,0 +1,49 @@
+----------------
+更改属组，属主
+----------------
+chown alice      file1	改变属主
+chown alice.hr	 file1	改变属主和属组
+chown 	   .hr   file1  改变属组	=  chgrp hr file1
+若想连同目录下的所有文件都一起修改，则加 -R 递归参数(chgrp同理)
+
+------------------
+更改权限
+------------------
+a.使用符号
+			对象	赋值符	权限类型
+			u		 +		r
+chmod		g		 -		w
+			o		 =		x		  file1
+			a
+
+chmod u+x file1  给user加上x权限
+chmod a=- file1  收回所有的权限
+			
+
+			
+-------------------------------------
+设置权限案例
+-------------------------------------
+针对hr部门的访问目录/home/hr设置权限，要求如下：
+1.root用户和hr组的员工可以读、写、执行
+2.其他用户没有任何权限
+
+# groupadd hr
+# useradd hr01 -G hr
+# useradd hr02 -G hr
+# mkdir /home/hr
+
+# chgrp hr /home/hr
+# chmod 770 /home/hr
+# ll -d /home/hr
+drwxrwx---   root hr   /home/hr
+
+-------------------
+注意事项
+----------------------
+文件：x 权限要小心给予(执行后可能有坏的结果)
+目录：w 权限要小心给予(可能会误删文件)
+
+
+
+
