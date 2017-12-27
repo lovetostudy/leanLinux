@@ -41,4 +41,43 @@ facl 设置基本权限： rwx
 
 # setfacl --remove-all(或-b) /home/test.txt(移除赋予的所有权限)
 
-	
+-----------------------------------
+ACL高级特性
+-----------------------------------
+
+mask:
+用于临时降低用户或组(除属主和其他人)的权限
+mask决定了他们的最高权限
+# setfacl -m mask::rwx /111
+建议：为了方便管理权限，其他人(other)的权限置为空
+
+
+
+default继承(默认):(只针对以后起效，当前仍旧为以前的权限)
+要求：希望alice能够对/home以及以后在/home下新建的文件有读、写、执行权限
+
+# setfacl -m d:u:alice:rwx /111
+# getfacl /111
+        # file: /111
+	#owner: root
+	#group: root
+	user::rwx
+	group::r-x
+	other::r-x
+	default:user::rw-
+	default:user:alice:rw-
+	default:group::r--
+	default:group:hr:rw-
+	default:mask::rw-	
+	default:other::r--
+   
+思路：
+步骤一： 赋予alice对/home读、写、执行权限
+# setfacl -R -m u:alice:rwx /home
+
+步骤二： 赋予alice 对以后在/home新建的文件有读、写、执行权限（使alice的权限继承）
+# setfacl -m d:ualice:rwx /home
+
+
+
+
