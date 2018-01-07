@@ -1,0 +1,18 @@
+suid 	普通用户通过suid提权	<针对文件>
+	chmod u+s 
+	如：passwd命令
+
+
+sgid	新建文件继承目录属组	<针对目录>
+	chmod g+s /home/hr
+	drwxr-sr-x 2 root hr /home/hr
+	在/home/hr里，后面再创建的文件继承属组为hr
+
+
+sticky	用户只能删除自己的文件	<针对目录>
+	chmod o+t /home/dir1
+	谁可以删除文件：
+	root	文件的所有者	目录的所有者
+
+
+s s t, S S T 大写表示无x权限
