@@ -122,17 +122,6 @@ Unmount the partitions and reboot
 
 Graphical window:
 
-type 1:
-graphical envirenment: full-featured, comes with most all tools
-# pacman -S xorg-server xorg-xinit
-runr 'xinit' or 'startx' 
-this will read ~/.xinitrc to know what to start
-
-type 2: 
-window manager: minimalist, highly customizable
-# pacman -S i3-graps i3-status rxvt-unicode demenu
-
-
 My Way:!!!!!!!!!!!!!!!!!!!!!!!
 
 # pacman -S sudo xorg-server xorg-xinit
