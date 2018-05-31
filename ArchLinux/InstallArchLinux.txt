@@ -1,0 +1,161 @@
+
+Before installing Arch Linux, make sure your computer is connected to the internet.
+
+# dhcpcd
+# ping -c 3 archlinux.org
+
+If none is available, stop the dhcpcd service with systemctl stop dhcpcd@<TAB> and see Network configuration. https://wiki.archlinux.org/index.php/Network_configuration#Device_driver
+
+Partitioning Disk
+
+|--------------------------------------------------------------------|
+| HDD 8GB - RAM 3GB |
+|--------------------------------------------------------------------|
+| /DEV/SDA | SIZE | MOUNT POINT | 
+|--------------------------------------------------------------------|
+| sda1 | 10GB | / |
+|--------------------------------------------------------------------|
+| sda2 | 1GB | swap |
+|--------------------------------------------------------------------|
+| sda3 | 9GB | /home |
+|--------------------------------------------------------------------|
+
+# lsblk
+# cfdisk /dev/sda
+
+Format the partition sda1
+
+# mkfs.ext4 /dev/sda1
+
+Activate the swap partition
+
+# mkswap /dev/sda2
+# swapon /dev/sda2
+
+Format the partition sda3
+
+# mkfs.ext4 /dev/sda3
+
+Mount the file systems
+
+# mount /dev/sda1 /mnt
+
+# mkdir /mnt/home
+# mount /dev/sda3 /mnt/home
+
+Choose closest mirror list
+
+# pacman -Sy
+# pacman -S reflector
+# reflector --verbose -l 5 --sort rate --save /etc/pacman.d/mirrorlist
+Recommand: //mirrors.ustc.edu.cn/ or //mirrors.163.com/
+
+Install arch linux base packages
+
+# pacstrap -i /mnt base base-devel
+
+Configure Fstab and chroot /mnt
+
+# genfstab -U -p /mnt >> /mnt/etc/fstab
+# cat /mnt/etc/fstab
+# arch-chroot /mnt
+
+Configure language and location
+
+# vim /etc/locale.gen
+uncomment: en_US.UTF-8 UTF8 zh_CN.UTF-8 UTF-8
+# locale-gen
+# echo LANG=en_US.UTF-8 > /etc/locale.conf
+# export LANG=en_US.UTF-8
+
+Set time zone
+
+# ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+# hwclock --systohc --utc
+
+
+Configure the repository
+
+# vim /etc/pacman.conf
+Uncomment the line: [multilib] and include = /etc/pacman.d/mirrorlist
+		[archlinxcn]
+		SigLevel = Optional TrustAll
+		Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+# pacman -Sy
+
+Set hostname and network
+
+# echo freek > /etc/hostname
+# echo 127.0.0.1 localdomain.localhost localhost >> /etc/hosts
+# echo ::1 localdomain.localhost localhost >> /etc/hosts
+# echo 127.0.0.1 freek.localhost freek >> /etc/hosts
+
+Set root password and create new user
+
+# passwd
+# pacman -S sudo bash-completion
+# useradd -m -g users -G wheel,storage,power -s /bin/bash freek
+# passwd freek
+# systemctl enable dhcpcd
+
+Allow the users in wheel group to be able to preformance administrative tasks with sudo:
+
+# EDITOR=nano visudo
+			freek ALL=(ALL) ALL
+Uncomment the line: 	%wheel ALL=(ALL)
+
+Install and configure bootloader
+
+# pacman -S grub os-prober
+# grub-install /dev/sda
+# grub-mkconfig -o /boot/grub/grub.cfg
+
+Unmount the partitions and reboot
+
+# exit
+# umount -R /mnt
+# reboot
+
+
+
+
+Graphical window:
+
+type 1:
+graphical envirenment: full-featured, comes with most all tools
+# pacman -S xorg-server xorg-xinit
+runr 'xinit' or 'startx' 
+this will read ~/.xinitrc to know what to start
+
+type 2: 
+window manager: minimalist, highly customizable
+# pacman -S i3-graps i3-status rxvt-unicode demenu
+
+
+My Way:!!!!!!!!!!!!!!!!!!!!!!!
+
+# pacman -S sudo xorg-server xorg-xinit
+# pacman -S deepin deepin-extra
+# pacman -S xf86-video-vesa(or nvidia)
+# pacman -S iw wpa_supplicant dialog
+
+# vim /etc/lightdm/lightdm.conf --> greeter-session=lightdm-deepin-greeter
+# systemctl enable lightdm
+
+Font:
+# pacman -S ttf-dejavu (the system language is English)
+# pacman -S ttf-wqy-microhei
+
+
+
+
+Other Software:
+chrome : pacman -S google-chrome
+netease: pacman -S netease-cloud-music
+sogou: pacman -S fcitx-sogoupinyin fcitx-configtool -->vim .xprofile
+	export GTK_IM_MODULE=fcitx
+	export QT_IM_MODULE=fcitx
+	export XMODIFIERS="!im=fcitx"
+
+
