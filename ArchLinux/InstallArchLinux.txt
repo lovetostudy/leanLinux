@@ -146,5 +146,6 @@ sogou: pacman -S fcitx-sogoupinyin fcitx-configtool -->vim .xprofile
 	export GTK_IM_MODULE=fcitx
 	export QT_IM_MODULE=fcitx
 	export XMODIFIERS="!im=fcitx"
-
+flash: pacman -S lib32-flashplugin
+qq : pacman -S deepin-qq-im
 
