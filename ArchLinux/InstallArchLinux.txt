@@ -130,6 +130,7 @@ My Way:!!!!!!!!!!!!!!!!!!!!!!!
 # pacman -S iw wpa_supplicant dialog
 
 # vim /etc/lightdm/lightdm.conf --> greeter-session=lightdm-deepin-greeter
+# vim /etc/X11/xinit/xinitrc --> last part (annotation all) --> add --> exec startdde
 # systemctl enable lightdm
 
 Font:
@@ -147,5 +148,8 @@ sogou: pacman -S fcitx-sogoupinyin fcitx-configtool -->vim .xprofile
 	export QT_IM_MODULE=fcitx
 	export XMODIFIERS="!im=fcitx"
 flash: pacman -S lib32-flashplugin
-qq : pacman -S deepin-qq-im
+qq : pacman -S deepin-qq-im(may useless)
+aria2: pacman -S aria2
+steam: pacman -S steam (or need install steam-native-runtime)
+
 
