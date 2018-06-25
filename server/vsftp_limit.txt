@@ -3,7 +3,7 @@
 使用户待在目录中。在google了N多方法后，找到了如下的解决方案。
 	现在基于用户列表文件 /etc/vsftpd.userlist 来配置 FTP 来允许/拒绝用户的访问。
 
-	默认情况下，如果设置了 userlist_enable=YES，当 userlist_deny 选项设置为 YES 的时候，	userlist_file=/	etc/vsftpd.userlist 中列出的用户被拒绝登录。
+	默认情况下，如果设置了 userlist_enable=YES，当 userlist_deny 选项设置为 YES 的时候，	userlist_file=/etc/vsftpd.userlist 中列出的用户被拒绝登录。
 
 	然而， 更改配置为 userlist_deny=NO，意味着只有在 userlist_file=/etc/vsftpd.userlist 显式指定的用户才允许登录。
 	在原有配置下加入一下配置：
