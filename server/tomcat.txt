@@ -1,0 +1,28 @@
+1.下载文件包
+wget http://mirrors.shu.edu.cn/apache/tomcat/tomcat-8/v8.5.31/bin/apache-tomcat-8.5.31.tar.gz
+
+2.解压文件包
+tar -xzvf apache-tomcat-8.5.31.tar.gz
+
+3.将解压后的包移动到指定文件夹
+ mv apache-tomcat-8.5.31 ../
+
+4.编辑tomcat的字符集
+vim apache-tomcat-8.5.31/conf/server.xml
+	在<Connector port="8080" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" （在此添加）/> 
+	添加 URIEncoding="UTF-8"
+
+5.将bin路径加入/etc/profile中
+	export TOMCAT_HOME=/developer/apache-tomcat-8.5.31
+	export PATH=$PATH:$TOMCAT_HOME/bin
+	若不生效则加入(export LC_ALL=en_US.UTF-8)
+
+6.使配置生效
+ source /etc/profile
+
+7.启动tomcat
+/developer/apache-tomcat-8.5.31/bin/./startup.sh
+
+8.修改防火墙

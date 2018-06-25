@@ -1,0 +1,19 @@
+1.下载maven包
+ wget http://mirrors.shu.edu.cn/apache/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz
+
+2.解压maven包
+tar -xzvf apache-maven-3.5.4-bin.tar.gz 
+
+3.将解压包移动到指定目录下
+mv apache-maven-3.5.4 ../
+
+4.设置环境变量
+vim /etc/profile
+添加如下条件
+export MAVEN_HOME=/developer/apache-maven-3.5.4
+export PATH=$PATH:$TOMCAT_HOME/bin:$MAVEN_HOME/bin
+
+若不生效则加入(export LC_ALL=en_US.UTF-8)
+
+5.使配置生效
+ source /etc/profile

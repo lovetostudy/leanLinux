@@ -1,0 +1,18 @@
+1.进入目录
+cd /etc/sysconfig/
+
+2.安装防火墙
+yum -y install iptables-services.x86_64
+
+3.备份iptables
+cp iptables iptables.bak
+
+4.获取iptables配置文件
+wget http://learning.happymmall.com/env/iptables
+
+5.修改iptable配置文件
+vim iptables.1(因为原来有一份)
+（删除原来的，并将iptables.1命名为iptables)
+
+6.重启防火墙
+systemctl restart iptables.service

@@ -1,0 +1,26 @@
+  这两天尝试配置了ftp服务器,用的是vsftp。系统是：centOs7, vsftp的版本是3.0.2。
+  在实施时，遇到了这样的问题：既想控制本地用户在一个目录内，又想本地用户有上传和下载功能。但是，因为vsftp在2.3.5版本后，开启限制用户活动目录时，需要去掉目录的w权限，导致用户无法使用上传功能。而开启用户的上传功能后，又无法
+使用户待在目录中。在google了N多方法后，找到了如下的解决方案。
+	现在基于用户列表文件 /etc/vsftpd.userlist 来配置 FTP 来允许/拒绝用户的访问。
+
+	默认情况下，如果设置了 userlist_enable=YES，当 userlist_deny 选项设置为 YES 的时候，	userlist_file=/	etc/vsftpd.userlist 中列出的用户被拒绝登录。
+
+	然而， 更改配置为 userlist_deny=NO，意味着只有在 userlist_file=/etc/vsftpd.userlist 显式指定的用户才允许登录。
+	在原有配置下加入一下配置：
+	userlist_enable=YES                   ### vsftpd 将从 userlist_file 给出的文件中载入用户名列表
+	userlist_file=/etc/vsftpd.userlist    ### 存储用户名的文件
+	userlist_deny=NO   
+
+	local_root=/var/ftp/		     ### 你所规定的目录
+	chroot_list_enable=YES		     ### 激活chroot功能
+	chroot_list_file=/etc/vsftpd/chroot_list 	### 设置锁定用户在根目录中的列表文件
+	allow_writeable_chroot=YES
+
+
+然后用vim添加文件, vim /etc/vsftpd.userlist,在其中添加可登陆的用户名
+vim /etc/vsftpd/chroot_list,在其中添加限制在根目录中的用户名
+最后重启服务即可。
+
+这时,在Windows下用资源管理器(文件夹)登录的话,则默认是匿名登录,所以在登录是应该用如下方式来登录：
+	ftp://yourusername@yourip
+然后用账号密码验证即可登录。

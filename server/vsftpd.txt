@@ -1,0 +1,42 @@
+1.安装vsftpd
+yum -y install vsftpd
+
+2.创建ftp目录
+mkdir /product
+cd /product
+mkdir ftpfile
+
+3.创建fptuser(有登录ftp权限，无登录服务器的权限)
+useradd ftpuser -d /product/ftpfile -s /sbin/nologin
+
+4.修改ftp目录的用户组
+chown -R ftpuser.ftpuser ./ftpfile
+
+5.重置ftpuser的密码
+passwd ftpuser 
+
+6.编辑配置文件
+vim /etc/vsftpd/chroot_list
+	将刚刚创建的用户的用户名加入文件中
+
+7.检查/etc/selinux/config文件
+看SELINUX=disabled 是否是disabled
+运行setsebool -P ftp_home_dir 1 看是否为disabled
+
+8.备份并编辑/etc/vsftpd/vsftpd.conf
+cp /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf.bak
+vim /etc/vsftpd/vsftpd.conf
+	anonymous_enable=NO
+	local_root=/product/ftpfile 
+	anon_root=/product/ftpfile
+	use_localtime=YES
+	解开注释并修改
+	chroot_local_user=NO
+	chroot_list_enable=YES
+	chroot_list_file=/etc/vsftpd/chroot_list
+	在末尾添加
+	#pasv_enable=YES
+	pasv_min_port=61001
+	pasv_max_port=62000
+
+9.修改防火墙

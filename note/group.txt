@@ -26,7 +26,7 @@ e.	root用户可以给任何用户设置密码
 	普通用户只能给自己修改密码，而且必须提供原密码
 
 f. 组成员管理
-	user mod -s /sbin/nologin user05 // 修改用户的shell
+	usermod -s /sbin/nologin user05 // 修改用户的shell
 	
 	gpasswd -a jack wheel(推荐) 	// (不推荐)usermod -aG macket user05
 	//添加	  什么用户 到  什么组
