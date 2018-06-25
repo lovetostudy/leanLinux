@@ -34,3 +34,14 @@ flush privileges;
 
 (查看用户表):
 select user,host,password from mysql.user;
+
+
+删除Mysql
+
+   yum remove  mysql mysql-server mysql-libs mysql-server;
+
+    find / -name mysql 将找到的相关东西delete掉；
+
+    rpm -qa|grep mysql(查询出来的东东yum remove掉)
+
+
