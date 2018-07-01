@@ -1,9 +1,24 @@
-wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
-sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm
-yum update
+安装mysql
+	wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+	sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm
+	yum update
 
-sudo yum install mysql-server
-sudo systemctl start mysqld
+	sudo yum install mysql-server
+
+修改配置文件	
+	vim /etc/my.cnf
+	添加	
+		[mysqld]
+		character-set-server=utf8 
+		[client]
+		default-character-set=utf8
+		[mysql]
+		default-character-set=utf8 
+
+开启mysql
+	sudo systemctl start mysqld
+
+
 
 修改root用户的密码的4种方式：
 1、登陆MySQL终端，直接运行如下命令
