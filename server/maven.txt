@@ -1,8 +1,9 @@
 1.下载maven包
- wget http://mirrors.shu.edu.cn/apache/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz
-
+ 网站：https://maven.apache.org/download.cgi
+ 用wget下载
+ 
 2.解压maven包
-tar -xzvf apache-maven-3.5.4-bin.tar.gz 
+tar -xzvf 
 
 3.将解压包移动到指定目录下
 mv apache-maven-3.5.4 ../

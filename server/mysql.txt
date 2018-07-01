@@ -33,7 +33,10 @@ mysql>flush privileges;
 3、在shell命令行里修改MySQL用户密码
 [root@bogon]# mysqladmin -u root password “666666”;
 
-4.在MySQL终端中使用GRANT语句修改				（授权方式）
+4.删除空行
+delete from user where user="";
+
+5.在MySQL终端中使用GRANT语句修改				（授权方式）
 mysql>GRANT ALL PRIVILEGES ON *.* TO 'root'@'127.0.0.1' IDENTIFIED BY '888888' WITH GRANT OPTION;
 	GRANT ALL PRIVILEGES ON *.* TO 'root'@'其它两项' IDENTIFIED BY '888888' WITH GRANT OPTION;
 mysql>flush privileges;
