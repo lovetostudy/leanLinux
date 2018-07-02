@@ -2,7 +2,7 @@ echo "==================  delete the old ROOT.war file  ========"
 rm /developer/apache-tomcat-8.5.32/webapps/ROOT.war
 
 echo "==================  move war file to tomcat  ============="
-mv /product/ftpuser/magnetive_valve.war /developer/apache-tomcat-8.5.32/webapps/ROOT.war
+mv /product/ftpuser/magnetic_valve.war /developer/apache-tomcat-8.5.32/webapps/ROOT.war
 
 echo "==================  remove ROOT dir  ====================="
 rm -rf /developer/apache-tomcat-8.5.32/webapps/ROOT
