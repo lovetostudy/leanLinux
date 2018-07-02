@@ -1,9 +1,8 @@
 安装mysql
 	wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
-	sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm
-	yum update
-
-	sudo yum install mysql-server
+	rpm -ivh mysql-community-release-el7-5.noarch.rpm
+	yum -y update
+	yum -y install mysql-server
 
 修改配置文件	
 	vim /etc/my.cnf
@@ -16,7 +15,7 @@
 		default-character-set=utf8 
 
 开启mysql
-	sudo systemctl start mysqld
+	systemctl start mysqld
 
 
 

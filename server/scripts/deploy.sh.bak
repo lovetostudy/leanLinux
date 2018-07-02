@@ -1,0 +1,21 @@
+echo "====================delete the old ROOT.war file============="
+rm /developer/apache-tomcat-8.5.31/webapps/ROOT.war
+
+echo "====================copy the war file to tomcat directory======"
+mv /var/ftp/bro/magnetic_valve.war /developer/apache-tomcat-8.5.31/webapps/ROOT.war
+
+echo "===================delete old ROOT directory on tomcat========"
+rm -rf /developer/apache-tomcat-8.5.31/webapps/ROOT
+
+echo "===================shutdown tomcat service===================="
+/developer/apache-tomcat-8.5.31/bin/./shutdown.sh
+
+echo "===================sleep 10s=================================="
+for i in{1..10}
+do
+	echo $i"s"
+	sleep 1s
+done
+
+echo "==================start tomcat================================"
+/developer/apache-tomcat-8.5.31/bin/./start.sh
