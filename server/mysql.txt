@@ -44,7 +44,7 @@ mysql>flush privileges;
 create user freek identified by 'WO@3youjizuoshan';
 
 (授权)：
-GRANT ALL PRIVILEGES ON *.* TO 'freek'@'%' IDENTIFIED BY 'WO@3youjizuoshan' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO 'freek'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;
 
 (刷新):
 flush privileges;
