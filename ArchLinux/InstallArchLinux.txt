@@ -48,7 +48,7 @@ Choose closest mirror list
 # pacman -Sy
 # pacman -S reflector
 # reflector --verbose -l 5 --sort rate --save /etc/pacman.d/mirrorlist
-Recommand: //mirrors.ustc.edu.cn/ or //mirrors.163.com/
+Recommand: //mirrors.ustc.edu.cn/archlinux/$repo/os/$arch or //mirrors.163.com/archlinux/$repo/os/$arch
 
 Install arch linux base packages
 
